@@ -50,6 +50,11 @@ julia_command("using Statistics")
 julia_command("PyPlot")
 ```
 
+__Note:__ also possible to start a Julia session within `R`:
+```R
+system("julia")
+```
+
 ### NCDatasets
 
 ```R
