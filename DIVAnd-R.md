@@ -7,6 +7,10 @@ __Documentation:__ https://cran.r-project.org/web/packages/JuliaCall/readme/READ
 sudo apt install r-base
 ```
 
+## Installation of Julia
+
+We suggest to use the `juliaup` tool (https://github.com/JuliaLang/juliaup), which makes easier the installation, upgrade and management of different versions of Julia.
+
 ## Installation of Julia in R
 
 ```R
