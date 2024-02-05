@@ -17,15 +17,32 @@ __Documentation:__ https://cran.r-project.org/web/packages/JuliaCall/readme/READ
 sudo apt install r-base
 ```
 
-## Installation of Julia
+### Installation of Julia
 
 We suggest to use the `juliaup` tool (https://github.com/JuliaLang/juliaup), which makes easier the installation, upgrade and management of different versions of Julia.
 
-## Installation of Julia in R
+### Installation of Julia in R
 
 In a R session:
 ```R
 install.packages("JuliaCall")
+```
+
+You are asked if you want to use a personal library (say "yes"):
+```R
+Warning in install.packages("JuliaCall") :
+  'lib = "/usr/local/lib/R/site-library"' is not writable
+Would you like to use a personal library instead? (yes/No/cancel) 
+```
+
+### Installation of netCDF 
+
+R relies on the utility `nc-config` to it has to be installed:
+```bash
+sudo apt-get install libnetcdf-dev
+```
+then the library can be installed:
+```R
 install.packages("ncdf4")
 ```
 
@@ -36,12 +53,11 @@ You may want to specify the path to the Julia executable:
 library(JuliaCall)
 julia_setup(JULIA_HOME = "/home/ctroupin/.juliaup/bin/")
 ```
-If sucessful, this command will issue
+If successful, this command will give:
 ```R
-Juliaup configuration is locked by another process, waiting for it to unlock.
-Julia version 1.9.1 at location /home/ctroupin/.julia/juliaup/julia-1.9.1+0.x64.linux.gnu/bin will be used.
+Julia version 1.9.3 at location /home/ctroupin/.julia/juliaup/julia-1.9.3+0.x64.linux.gnu/bin will be used.
 Loading setup script for JuliaCall...
-Finish loading setup script for JuliaCall.
+
 ```
 
 ## Install Julia packages
