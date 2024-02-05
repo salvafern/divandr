@@ -31,3 +31,42 @@ https://alexander-barth.github.io/NCDatasets.jl/latest/issues/
 echo $LD_PRELOAD
 echo $LD_LIBRARY_PATH
 (→ empty)
+
+
+> install.packages("terra")
+Installing package into ‘/home/ctroupin/R/x86_64-pc-linux-gnu-library/4.1’
+(as ‘lib’ is unspecified)
+trying URL 'https://cloud.r-project.org/src/contrib/terra_1.7-71.tar.gz'
+Content type 'application/x-gzip' length 836573 bytes (816 KB)
+==================================================
+downloaded 816 KB
+
+* installing *source* package ‘terra’ ...
+** package ‘terra’ successfully unpacked and MD5 sums checked
+** using staged installation
+configure: CC: gcc
+configure: CXX: g++ -std=gnu++14
+checking for gdal-config... no
+no
+configure: error: gdal-config not found or not executable.
+ERROR: configuration failed for package ‘terra’
+* removing ‘/home/ctroupin/R/x86_64-pc-linux-gnu-library/4.1/terra’
+
+The downloaded source packages are in
+	‘/tmp/Rtmp7j3L7z/downloaded_packages’
+Warning message:
+In install.packages("terra") :
+  installation of package ‘terra’ had non-zero exit status
+
+  
+
+Error in download.file(dataurl, turtlefile) : 
+  internet routines cannot be loaded
+In addition: Warning message:
+In download.file(dataurl, turtlefile) :
+  unable to load shared object '/usr/lib/R/modules//internet.so':
+  /home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/lib/julia/libcurl.so.4.8.0: version `CURL_OPENSSL_4' not found (required by /usr/lib/R/modules//internet.so)
+
+
+
+sudo apt-get install libgdal-dev

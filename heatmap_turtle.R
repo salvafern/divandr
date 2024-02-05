@@ -11,6 +11,10 @@
 
 #   ––––––––––––––––––––––––––––––––––––––––––––––––––
 
+library(logger)
+library(ggplot2)
+library(ggmap)
+
 julia_command("using DIVAnd")
 julia_command("using PyPlot")
 julia_command("using Statistics")
@@ -18,51 +22,66 @@ julia_command("using DelimitedFiles")
 julia_command("using LinearAlgebra")
 julia_command("using Random")
 
+# Create directories
+datadir <- "./data/"
+figdir <- "./figures/"
+resdir <- "./results/"
 
-# Read the data retrieved from OBIS
-datadir = "../data"
-if (!dir.exists(datadir)){
-  dir.create(datadir)
-}else{
-  print("data directory exists")
-}
+dir.create(datadir)
+dir.create(figdir)
+dir.create(resdir)
 
-turtlefile <- "../data/turtles.dat"
-dataurl <- "hhttps://dox.ulg.ac.be/index.php/s/IsWWlNxWeQDuarJ/download"
-
+# Download the data file
+# (hosted on ULiege OwnCloud instance)
+turtlefile <- file.path(datadir, "turtles.dat")
+doxbaseURL <- "https://dox.uliege.be/index.php/s/" 
+dataurl <- paste(doxbaseURL,"IsWWlNxWeQDuarJ/download", sep = "")
 
 if (!file.exists(turtlefile)){
-    download.file(dataurl, turtlefile)
+    log_info("Downloading data file")
+    download.file(url = dataurl, destfile = turtlefile)
 }else{
-    print("Data file already downloaded")
+    log_info("Data file already downloaded")
 }
 
+# Read the CSV file
+AA = read.csv(turtlefile, header = FALSE, sep = "\t",  dec = ".",  comment.char = "")
+log_info("{dim(AA)}")
 
-AA=readdlm(turtlefile)
-@show size(AA);
+lon=AA[,1]
+lat=AA[,2]
+log_info("Mean longitude: {mean(lon)}")
+log_info("Mean latitude: {mean(lat)}")
 
-lon=AA[:,1]
-lat=AA[:,2]
-mean(lon), mean(lat)
+# Make a simple plot
+deltalon <- 1.
+deltalat <- 1.
+domain <- c(left = min(lon) - deltalon, bottom = min(lat) - deltalat, right = max(lon) + deltalon, top = max(lat) + deltalat)
 
-scatter(lon,lat,s=1)
-xlabel("Longitude")
-ylabel("Latitude")
-title("Location of observations")
+ggplot() +
+  geom_point(aes(x = lon, y = lat), size = 1, colour="red") +
+  xlab("Longitude (°N)") +
+  ylab("Latitude (°E)") +
+  coord_sf(
+    xlim = c(-20, 15),
+    ylim = c(40, 64.)) + 
+  borders("world",fill="black",colour="black") + 
+  ggtitle("Location of the observations") 
+
+ggsave(file.path(figdir, "observations.png"))
+
 
 #   A simple heatmap without land mask
 #   ====================================
 
 julia_assign("NX", 300)
 julia_assign("NY", 250)
-# Box size
-julia_assign("LX", 18.)
-julia_assign("LY", 15.)
+
+dx=LX/(NX)
+dy=LY/(NY)
+
 # Bounding box
-julia_assign("xleft", -14.)
-julia_assign("ybot", 47.)
-julia_assign("xright", xleft+LX)
-julia_assign("ytop", ybot+LY)
+# Defined in domain variable
 
 xo=lon
 yo=lat
@@ -73,16 +92,10 @@ sel=(xo.>xleft) .& (xo.<xright) .& (yo.>ybot) .& (yo.<ytop)
 xo=xo[sel]
 yo=yo[sel]
 inflation=ones(size(xo))
-scatter(xo,yo,s=1)
-xlabel("Longitude")
-ylabel("Latitude")
-title("Location of observations in grid box")
 
 #   Heatmap
 #   –––––––––
 
-dx=LX/(NX)
-dy=LY/(NY)
 
 xg = xleft+dx/2:dx:xleft+LX
 yg = ybot+dy/2:dy:ybot+LY

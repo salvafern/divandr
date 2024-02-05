@@ -63,11 +63,27 @@ install.packages("ncdf4")
 
 ### Installation of other packages
 
+#### jsonlite
 When tested with Visual Studio Code, the editor required to install `jsonlite`
 ```R
 install.packages("jsonlite")
 ```
 even if the installation may not be a strict requirement.
+
+#### logger 
+The `logger` package is also installed for the logging purposes.
+```R
+install.packages("logger")
+```
+
+#### ggplots2 and ggmap
+
+In Julia, the plots are create with the `PyPlot` module, which is calling Python `matplotlib` functions. It might be more relevant to use only `R` library for the plotting tasks:
+
+```R
+install.packages("ggplots2")
+install.packages("ggmap")
+```
 
 ## Configure Julia
 
@@ -92,12 +108,6 @@ julia_install_package_if_needed("Statistics")
 julia_install_package_if_needed("PyPlot")
 julia_install_package_if_needed("DIVAnd")
 julia_install_package_if_needed("NCDatasets")
-```
-
-`PyPlot` is a Julia package that use Python `matplotlib` library. It is probably possible to create all the plots using a `R` library instead, such as `ggplot2`.
-
-```R
-install.packages("ggplot2")
 ```
 
 ## Loading Julia packages
@@ -138,3 +148,11 @@ and
 Precompiling DIVAnd
   1 dependency successfully precompiled in 4 seconds. 192 already precompiled.
 ```
+
+
+url <- "https://data.cms.gov/provider-data/sites/default/files/resources/49244993de5a948bcb0d69bf5cc778bd_1681445112/Measure_Dates.csv"
+
+file_name <- "measure_dates.csv"
+file_path <- "./data/"
+
+download.file(url = url, destfile = paste0(file_path, file_name, sep = ""))
