@@ -40,10 +40,10 @@ which gives, in our case:
 
 In a R session:
 ```R
-  install.packages("JuliaCall")
+install.packages("JuliaCall")
 ```
 
-You are asked if you want to use a personal library (say "yes"):
+You are asked if you want to use a personal library (type "yes"):
 ```R
 Warning in install.packages("JuliaCall") :
   'lib = "/usr/local/lib/R/site-library"' is not writable
@@ -76,14 +76,28 @@ The `logger` package is also installed for the logging purposes.
 install.packages("logger")
 ```
 
-#### ggplots2 and ggmap
+#### Plotting libraries
 
 In Julia, the plots are create with the `PyPlot` module, which is calling Python `matplotlib` functions. It might be more relevant to use only `R` library for the plotting tasks:
 
 ```R
-install.packages("ggplots2")
+install.packages("ggplot2")
 install.packages("ggmap")
+install.packages("sf")
+install.packages("terra")
+install.packages("rnaturalearth")
+install.packages("rnaturalearthdata")
 ```
+
+| Library  | Description |
+| ------------- | ------------- |
+| [ggplot2](https://cran.r-project.org/web/packages/ggplot2/index.html)  | creating graphics, based on _The Grammar of Graphics_  |
+| [ggmap](https://cran.r-project.org/web/packages/ggmap/index.html)  | spatial data and models on top of static maps |
+| [rnaturalearth](https://cran.r-project.org/web/packages/rnaturalearth/index.html)  | World Map Data from Natural Earth |
+| [rnaturalearthdata](https://cran.r-project.org/web/packages/rnaturalearthdata/index.html) | World Map Data from Natural Earth Used in 'rnaturalearth' |
+| [sf](https://cran.r-project.org/web/packages/sf/index.html)  | simple features, to encode spatial vector data  |
+| [terra](https://cran.r-project.org/web/packages/terra/index.html)  | spatial data analysis with vector and raster data |
+  
 
 ## Configure Julia
 
@@ -94,10 +108,12 @@ julia_setup(JULIA_HOME = "/home/ctroupin/.juliaup/bin/")
 ```
 If successful, this command will give:
 ```R
+Juliaup configuration is locked by another process, waiting for it to unlock.
 Julia version 1.10.0 at location /home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/bin will be used.
 Loading setup script for JuliaCall...
-
+Finish loading setup script for JuliaCall.
 ```
+so you can test if R is going to use the correct Julia executable.
 
 ## Install Julia packages
 
@@ -105,7 +121,6 @@ __Documentation:__ https://search.r-project.org/CRAN/refmans/JuliaCall/html/juli
 
 ```R
 julia_install_package_if_needed("Statistics")
-julia_install_package_if_needed("PyPlot")
 julia_install_package_if_needed("DIVAnd")
 julia_install_package_if_needed("NCDatasets")
 ```
@@ -117,7 +132,6 @@ ensure that the Julia packages are already installed (with the Julia version spe
 
 ```R
 julia_command("using Statistics")
-julia_command("using PyPlot")
 ```
 
 __Note:__ it is also possible to start a Julia session within `R`:
@@ -127,9 +141,8 @@ system("julia")
 
 ### NCDatasets
 
-I might be necessary to issue this command before starting the `R` session, in order to ensure the correct `libcurl` is used:
+I might be necessary to issue this command __before__ starting the `R` session, in order to ensure the correct `libcurl` is used:
 ```bash
-export LD_PRELOAD=/home/ctroupin/.local/share/R/JuliaCall/julia/1.9.1/julia-1.9.1/lib/julia/libcurl.so.4.8.0
 export LD_PRELOAD=/home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/lib/julia/libcurl.so.4.8.0
 ```
 (with the obvious adaptations in the path and in the library number).
@@ -149,10 +162,10 @@ Precompiling DIVAnd
   1 dependency successfully precompiled in 4 seconds. 192 already precompiled.
 ```
 
+## Quick test
 
-url <- "https://data.cms.gov/provider-data/sites/default/files/resources/49244993de5a948bcb0d69bf5cc778bd_1681445112/Measure_Dates.csv"
 
-file_name <- "measure_dates.csv"
-file_path <- "./data/"
-
-download.file(url = url, destfile = paste0(file_path, file_name, sep = ""))
+```bash
+export LD_PRELOAD=/home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/lib/julia/libcurl.so.4.8.0
+Rscript DIVAnd_simple_1D.R
+```

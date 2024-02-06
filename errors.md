@@ -70,3 +70,10 @@ In download.file(dataurl, turtlefile) :
 
 
 sudo apt-get install libgdal-dev
+
+
+remotes::install_github("ropensci/rnaturalearthhires")
+
+
+> julia_install_package("Statistics")
+/usr/lib/R/bin/exec/R: symbol lookup error: /home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/lib/julia/libcurl.so.4.8.0: undefined symbol: nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation
