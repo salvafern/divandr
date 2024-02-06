@@ -61,7 +61,9 @@ then the library can be installed:
 install.packages("ncdf4")
 ```
 
-### Installation of other packages
+### Installation of other packages [optional]
+
+No used so far but let's keep it here for the time being.
 
 #### jsonlite
 When tested with Visual Studio Code, the editor required to install `jsonlite`
@@ -101,10 +103,10 @@ install.packages("rnaturalearthdata")
 
 ## Configure Julia
 
-You may want to specify the path to the Julia executable:
+You may want to specify the path to the Julia executable with the command `julia_setup`:
 ```R
 library(JuliaCall)
-julia_setup(JULIA_HOME = "/home/ctroupin/.juliaup/bin/")
+julia_setup(JULIA_HOME = path.expand("~/.juliaup/bin/"))
 ```
 If successful, this command will give:
 ```R
@@ -113,9 +115,12 @@ Julia version 1.10.0 at location /home/ctroupin/.julia/juliaup/julia-1.10.0+0.x6
 Loading setup script for JuliaCall...
 Finish loading setup script for JuliaCall.
 ```
-so you can test if R is going to use the correct Julia executable.
+so you can test if R is actually going to use the correct Julia executable.      
 
 ## Install Julia packages
+
+We use the command `julia_install_package_if_needed( )` for the installation.      
+Some errors happened with using `julia_install_package( )`.
 
 __Documentation:__ https://search.r-project.org/CRAN/refmans/JuliaCall/html/julia_package.html
 
@@ -168,4 +173,4 @@ Precompiling DIVAnd
 ```bash
 export LD_PRELOAD=/home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/lib/julia/libcurl.so.4.8.0
 Rscript DIVAnd_simple_1D.R
-```
+``````

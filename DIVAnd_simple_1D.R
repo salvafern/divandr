@@ -3,7 +3,7 @@
 # with the command julia_assign("aa", aa), with aa taking the name of the different variables
 
 library(JuliaCall)
-julia_setup(JULIA_HOME = "/home/ctroupin/.juliaup/bin/")
+julia_setup(JULIA_HOME = path.expand("~/.juliaup/bin/"))
 julia_command("using DIVAnd")
 library(logger)
 library(ggplot2)
