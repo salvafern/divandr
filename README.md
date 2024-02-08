@@ -17,6 +17,10 @@ __Documentation:__ https://cran.r-project.org/web/packages/JuliaCall/readme/READ
 sudo apt install r-base
 ```
 
+#### Editor [optional]
+
+If you want to work with an editor, the most widely used is [Rstudio](https://posit.co/download/rstudio-desktop/). Visual Studio Code also comes with various extensions to work with R (REditorSupport, R Debugger, ...). 
+
 ### Installation of Julia
 
 We suggest to use the `juliaup` tool (https://github.com/JuliaLang/juliaup), which makes easier the installation, upgrade and management of different versions of Julia. On Linux or Mac:
@@ -48,6 +52,17 @@ You are asked if you want to use a personal library (type "yes"):
 Warning in install.packages("JuliaCall") :
   'lib = "/usr/local/lib/R/site-library"' is not writable
 Would you like to use a personal library instead? (yes/No/cancel) 
+```
+
+#### Tested R versions
+
+* ```R                         
+version.string R version 4.3.2 (2023-10-31)
+nickname       Eye Holes
+```
+* ```R
+version.string R version 4.1.2 (2021-11-01)
+nickname       Bird Hippie    
 ```
 
 ### Installation of netCDF 

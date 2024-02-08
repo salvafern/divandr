@@ -77,3 +77,11 @@ remotes::install_github("ropensci/rnaturalearthhires")
 
 > julia_install_package("Statistics")
 /usr/lib/R/bin/exec/R: symbol lookup error: /home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/lib/julia/libcurl.so.4.8.0: undefined symbol: nghttp2_option_set_no_rfc9113_leading_and_trailing_ws_validation
+
+
+> *** stack smashing detected ***: terminated
+
+
+Error in dyn.load(file, DLLpath = DLLpath, ...) : 
+  unable to load shared object '/home/ctroupin/R/x86_64-pc-linux-gnu-library/4.3/sf/libs/sf.so':
+  /home/ctroupin/.julia/juliaup/julia-1.10.0+0.x64.linux.gnu/lib/julia/libcurl.so.4.8.0: version `CURL_OPENSSL_4' not found (required by /lib/libgdal.so.30)
