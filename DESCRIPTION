@@ -8,7 +8,7 @@ Author: c(
     person(given = "Salvador Jesus", family = "Fernandez Bejarano", role = c("aut", "cre"),
          email = "salvador.fernandez@vliz.be",
          comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern"))
-Maintainer: The package maintainer <yourself@somewhere.net>
+Maintainer: Salvador Jesus Fernandez Bejarano <salvador.fernandez@vliz.be>
 Description: DIVAnd performs an n-dimensional variational analysis of 
   arbitrarily located observations. This package is a wrapper for the Julia 
   software DIVAnd.
