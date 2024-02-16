@@ -1,0 +1,27 @@
+Package: divandr
+Type: Package
+Title: Run DIVAnd.jl from R
+Version: 0.1.0
+Author: c(
+    person(given = "Charles", family = "Troupin", role = "aut",
+         comment = c(github = "ctroupin")),
+    person(given = "Salvador Jesus", family = "Fernandez Bejarano", role = c("aut", "cre"),
+         email = "salvador.fernandez@vliz.be",
+         comment = c(ORCID = "0000-0003-0535-7677", github = "salvafern"))
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: DIVAnd performs an n-dimensional variational analysis of 
+  arbitrarily located observations. This package is a wrapper for the Julia 
+  software DIVAnd.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+SystemRequirements: Julia (>= 0.6.0), DIVAnd.jl
+Imports: 
+    JuliaCall
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3

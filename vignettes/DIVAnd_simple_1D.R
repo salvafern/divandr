@@ -47,7 +47,7 @@ julia_assign("mask", mask)
 julia_assign("epsilon2", epsilon2)
 
 # DIVAnd execution
-julia_command("fi, s = DIVAndrun(mask, (pm,) ,(xi,), (x,), f, len, epsilon2; alphabc=0);") 
+julia_command("fi, s = DIVAndrun(mask, (pm,) ,(xi,), (x,), f, len, epsilon2; alphabc=0);")
 
 # From Julia variable to R variable
 fi = julia_eval("fi")
@@ -58,10 +58,10 @@ ggplot() +
   geom_point(aes(x = x, y = f, colour = "Observations"), size = 3) +
   geom_line(aes(x = xi, y = fref, colour = "Reference")) +
   geom_line(aes(x = xi, y = fi, colour = "Interpolation")) +
-  scale_colour_manual("", 
+  scale_colour_manual("",
                       breaks = c("Observations", "Reference", "Interpolation"),
                       values = c("blue", "green", "orange")) +
-  theme(legend.position = c(0.8, 0.9)) + 
+  theme(legend.position = c(0.8, 0.9)) +
   xlab("x") +
   ylab("f") +
   ggtitle("DIVAnd interpolation in 1D")
