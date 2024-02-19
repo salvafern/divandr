@@ -19,8 +19,19 @@
 #'
 #' @export
 diva_setup <- function (pkg_check=TRUE,...){
+
+  # Check LD_PRELOAD
+  ld_preload <- Sys.getenv("LD_PRELOAD", unset = NA_character_)
+
+  ld_preload_is_not_set <- is.na(ld_preload)
+  if(ld_preload_is_not_set) stop('`Sys.getenv("LD_PRELOAD")` is not set. Did you update the `.bashrc` file?')
+
+  ld_preload_does_not_exists <- !file.exists(ld_preload)
+  if(ld_preload_does_not_exists) stop(paste0('`Sys.getenv("LD_PRELOAD")` is `', ld_preload, '` but this path does not exists.'))
+
   julia <- JuliaCall::julia_setup(installJulia=TRUE,...)
   if(pkg_check){
+    JuliaCall::julia_install_package_if_needed("Statistics")
     JuliaCall::julia_install_package_if_needed("NCDatasets")
     JuliaCall::julia_install_package_if_needed("DIVAnd")
   }
